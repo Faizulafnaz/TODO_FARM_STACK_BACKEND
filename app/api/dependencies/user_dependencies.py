@@ -9,11 +9,11 @@ from app.schemas.auth_schema import TokenPayload
 from app.services.user_service import UserService
 
 reusable_oauth = OAuth2PasswordBearer(
-    tokenUrl=f"{settings.API_V1_STR}/auth/login"
+    tokenUrl=f"{settings.API_V1_STR}/auth/login",
     scheme_name="JWT"
 )
 
-async def get_currect_user(token: str = Depends(reusable_oauth)) -> User:
+async def get_current_user(token: str = Depends(reusable_oauth)) -> User:
     try:
         payload = jwt.decode(
             token, settings.JWT_SECRET_KEY, algorithms=[settings.ALGORITHM]
